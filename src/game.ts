@@ -50,15 +50,15 @@ class Game {
         let lift = new Room("bij de lift");
 
         // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, receptie, null);
-        lab.setExits(outside, office, kantine, null);
-        office.setExits(null, null, null, lab);
-        receptie.setExits(null, null, null, lab);
-        broodjes.setExits(null, null, null, lab);
-        kantine.setExits(broodjes, null, null, lab);
-        lift.setExits(null, null, null, lab);
+        outside.setExits(null, theater, lab, pub, null);
+        theater.setExits(null, null, null, outside, null);
+        pub.setExits(null, outside, receptie, null, null);
+        lab.setExits(outside, office, kantine, null, null);
+        office.setExits(null, null, null, lab, null);
+        receptie.setExits(null, null, null, lab, null);
+        broodjes.setExits(null, null, null, lab, null);
+        kantine.setExits(broodjes, null, null, lab, null);
+        lift.setExits(null, null, null, lab, null);
 
         // spawn player outside
         this.currentRoom = outside;
@@ -86,6 +86,9 @@ class Game {
         }
         if(this.currentRoom.westExit != null) {
             this.out.print("west ");
+        }
+        if(this.currentRoom.teleportExit != null) {
+            this.out.print("teleport");
         }
         this.out.println();
         this.out.print(">");
