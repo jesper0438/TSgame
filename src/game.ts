@@ -32,6 +32,7 @@ class Game {
         this.isOn = true;
         this.createRooms();
         this.printWelcome();
+        this.createOptions();
     }
 
     /**
@@ -39,7 +40,8 @@ class Game {
      */
     createRooms() : void {
         // create the rooms
-        let outside = new Room("outside the main entrance of the university");
+        let outside = new Room("about to enter the HZ-Dungeon");
+        let enterance = new Room("trough the interance, welcome to the HZ-dungeon");
         let theater = new Room("in a lecture theater");
         let pub = new Room("in the campus pub");
         let lab = new Room("in a computing lab");
@@ -50,12 +52,13 @@ class Game {
         let lift = new Room("bij de lift");
 
         // initialise room exits
-        outside.setExits(null, theater, lab, pub, null);
+        outside.setExits(enterance, theater, lab, pub, null);
+        enterance.setExits(null, receptie, null, null, null);
         theater.setExits(null, null, null, outside, null);
         pub.setExits(null, outside, receptie, null, null);
         lab.setExits(outside, office, kantine, null, null);
         office.setExits(null, null, null, lab, null);
-        receptie.setExits(null, null, null, lab, null);
+        receptie.setExits(null, null, null, kantine, null);
         broodjes.setExits(null, null, null, lab, null);
         kantine.setExits(broodjes, null, null, lab, null);
         lift.setExits(null, null, null, lab, null);
@@ -63,7 +66,11 @@ class Game {
         // spawn player outside
         this.currentRoom = outside;
     }
-
+        // Create the options
+    createOptions() : void {
+        let orderkroket = new Option("een broodje kroket");
+        let vraaghulp = new Option("vraag de dames om hulp");
+    }   
     /**
      * Print out the opening message for the player.
      */
