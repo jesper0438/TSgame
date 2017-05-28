@@ -45,14 +45,20 @@ class Game {
         let lab = new Room("in a computing lab");
         let office = new Room("in the computing admin office");
         let receptie = new Room("Bij de dames van de receptie");
+        let kantine = new Room("In de kantine");
+        let broodjes = new Room("bij de broodjesafdeling, wat een keuze!");
+        let lift = new Room("bij de lift");
 
         // initialise room exits
         outside.setExits(null, theater, lab, pub);
         theater.setExits(null, null, null, outside);
         pub.setExits(null, outside, receptie, null);
-        lab.setExits(outside, office, null, null);
+        lab.setExits(outside, office, kantine, null);
         office.setExits(null, null, null, lab);
         receptie.setExits(null, null, null, lab);
+        broodjes.setExits(null, null, null, lab);
+        kantine.setExits(broodjes, null, null, lab);
+        lift.setExits(null, null, null, lab);
 
         // spawn player outside
         this.currentRoom = outside;
@@ -63,8 +69,8 @@ class Game {
      */
     printWelcome() : void {
         this.out.println();
-        this.out.println("Welcome to the HZ University Of Applied Science");
-        this.out.println("Get out as soon as possible!!");
+        this.out.println("You are in the HZ Dungeon of Applied Sciences");
+        this.out.println("Plant the flag and get out as soon as possible!");
         this.out.println("Type 'help' if you need help.");
         this.out.println();
         this.out.println("You are " + this.currentRoom.description);
@@ -127,6 +133,7 @@ class Game {
         this.out.println("   go quit help");
         return false;
     }
+       
 
     /** 
      * Try to go in one direction. If there is an exit, enter
@@ -200,5 +207,8 @@ class Game {
         else {
             return true;  // signal that we want to quit
         }
+    }
+     look(params : string[]) : boolean {
+        this.out.println("You are " + this.currentRoom.description);
     }
 }

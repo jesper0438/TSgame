@@ -1,0 +1,26 @@
+            p {
+                color: #f1effc;
+                text-align: center;
+            }
+            
+            .display-3 {
+                 font-family: Consolas, monaco, monospace;
+                 text-align: center;
+            }
+
+            .console {
+                font-family: Consolas, monaco, monospace;
+                background: #000;
+                color: #008000;
+                height: 250px;
+                overflow-y:scroll;
+            }
+
+            .jumbotron {
+                background: #616066;
+            }
+
+            body {
+                background: #65bded;
+            }
+        

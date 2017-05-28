@@ -59,6 +59,9 @@ class Parser {
             case "quit" : 
                 wantToQuit = this.game.quit(params);
                 break;
+            case "look" :
+                wantToQuit = this.game.look(params);
+                break;
             default :
                 // print an error when command is not known
                 wantToQuit = this.game.printError(params);
