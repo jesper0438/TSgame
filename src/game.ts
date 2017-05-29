@@ -20,6 +20,7 @@ class Game {
     out : Printer;
 
     currentRoom : Room;
+    specialOptions: Special;
 
     isOn : boolean;
 
@@ -32,7 +33,7 @@ class Game {
         this.isOn = true;
         this.createRooms();
         this.printWelcome();
-        this.createOptions();
+        this.createSpecials();
     }
 
     /**
@@ -43,29 +44,38 @@ class Game {
         let enterance = new Room("at the interance, welcome to the HZ-dungeon");
         let smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!")
         let lab = new Room("in a computing lab");
-        let valkuil1 =new Room("De lul....");
+        let valkuil1 = new Room("GAME OVER");
+        let valkuil2 =  new Room("GAME OVER");
         let receptie = new Room("Bij de dames van de receptie");
         let kantine = new Room("In de kantine");
         let broodjes = new Room("bij de broodjesafdeling, wat een keuze!");
-        let lift = new Room("bij de lift");
+        let elevator = new Room("bij de lift");
+        let verdieping1 = new Room("At the first floor");
+        let verdieping2 = new Room("At the second floor");
 
         // initialise room exits
-        enterance.setExits(smos, receptie, valkuil1, null, null);
+        enterance.setExits(smos, receptie, valkuil1, null, broodjes);
         smos.setExits(null, null, null, null, null);
         lab.setExits(null, null, kantine, null, null);
+        valkuil1.setExits(null, null, null, null, null);
+        valkuil2.setExits(null, null, null, null, null);
         receptie.setExits(null, null, null, kantine, null);
         broodjes.setExits(null, null, null, lab, null);
         kantine.setExits(broodjes, null, null, lab, null);
-        lift.setExits(null, null, null, lab, null);
+        elevator.setExits(lab, verdieping1, verdieping2, null, lab,);
+        verdieping1.setExits(verdieping2, null, null, null, null);
+        verdieping2.setExits(verdieping1, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
     }
-        // Create the options
-    createOptions() : void {
+        // Create the special options
+    createSpecials() : void {
         let orderkroket = new Option("een broodje kroket");
         let vraaghulp = new Option("vraag de dames om hulp");
     }   
+        // initalise special options
+        teleport.setSpecials(kantine,);
     /**
      * Print out the opening message for the player.
      */
@@ -89,8 +99,8 @@ class Game {
         if(this.currentRoom.westExit != null) {
             this.out.print("west ");
         }
-        if(this.currentRoom.teleportExit != null) {
-            this.out.print("teleport");
+        if(this.currentRoom.upExit != null) {
+            this.out.print("up ");
         }
         this.out.println();
         this.out.print(">");
@@ -170,6 +180,9 @@ class Game {
                 break;
             case "west" : 
                 nextRoom = this.currentRoom.westExit;
+                break;
+            case "up" : 
+                nextRoom = this.currentRoom.upExit;
                 break;
         }
 
