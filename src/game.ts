@@ -40,31 +40,26 @@ class Game {
      */
     createRooms() : void {
         // create the rooms
-        let outside = new Room("about to enter the HZ-Dungeon");
-        let enterance = new Room("trough the interance, welcome to the HZ-dungeon");
-        let theater = new Room("in a lecture theater");
-        let pub = new Room("in the campus pub");
+        let enterance = new Room("at the interance, welcome to the HZ-dungeon");
+        let smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!")
         let lab = new Room("in a computing lab");
-        let office = new Room("in the computing admin office");
+        let valkuil1 =new Room("De lul....");
         let receptie = new Room("Bij de dames van de receptie");
         let kantine = new Room("In de kantine");
         let broodjes = new Room("bij de broodjesafdeling, wat een keuze!");
         let lift = new Room("bij de lift");
 
         // initialise room exits
-        outside.setExits(enterance, theater, lab, pub, null);
-        enterance.setExits(null, receptie, null, null, null);
-        theater.setExits(null, null, null, outside, null);
-        pub.setExits(null, outside, receptie, null, null);
-        lab.setExits(outside, office, kantine, null, null);
-        office.setExits(null, null, null, lab, null);
+        enterance.setExits(smos, receptie, valkuil1, null, null);
+        smos.setExits(null, null, null, null, null);
+        lab.setExits(null, null, kantine, null, null);
         receptie.setExits(null, null, null, kantine, null);
         broodjes.setExits(null, null, null, lab, null);
         kantine.setExits(broodjes, null, null, lab, null);
         lift.setExits(null, null, null, lab, null);
 
         // spawn player outside
-        this.currentRoom = outside;
+        this.currentRoom = enterance;
     }
         // Create the options
     createOptions() : void {
