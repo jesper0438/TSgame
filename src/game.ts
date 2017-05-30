@@ -52,6 +52,9 @@ class Game {
         let elevator = new Room("bij de lift");
         let verdieping1 = new Room("At the first floor");
         let verdieping2 = new Room("At the second floor");
+        let l202 = new Room("at L202");
+        let l203 = new Room("at L203, don't get lost now...");
+
 
         // initialise room exits
         enterance.setExits(smos, receptie, valkuil1, null, broodjes);
@@ -65,17 +68,20 @@ class Game {
         elevator.setExits(lab, verdieping1, verdieping2, null, lab,);
         verdieping1.setExits(verdieping2, null, null, null, null);
         verdieping2.setExits(verdieping1, null, null, null, null);
+        l202.setExits(verdieping2, l203, null, null, null);
+        l203.setExits(verdieping1, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
     }
         // Create the special options
     createSpecials() : void {
-        let orderkroket = new Option("een broodje kroket");
-        let vraaghulp = new Option("vraag de dames om hulp");
+        let askforhelp = new Option("een broodje kroket");
+        let teleport = new Option("Teleporteren");
+        let plantflag = new Option("plant the flag");
     }   
         // initalise special options
-        teleport.setSpecials(kantine,);
+        
     /**
      * Print out the opening message for the player.
      */
