@@ -124,6 +124,11 @@ class Game {
         this.out.println("Thank you for playing.  Good bye.");
         this.out.println("Hit F5 to restart the game");
     }    
+  SaveYourSelf() : void {
+      this.isOn = false;
+      this.out.println("doei");
+      this.out.println("Press F5 to restart");
+  }  
 
     /**
      * Print out error message when user enters unknown command.
@@ -171,6 +176,12 @@ class Game {
             case "up" : 
                 nextRoom = this.currentRoom.upExit;
                 break;
+            case "down" : 
+                nextRoom = this.currentRoom.downExit;
+                break;
+            case "teleport" : 
+                nextRoom = this.currentRoom.teleportExit;
+                break;
         }
 
         if (nextRoom == null) {
@@ -193,6 +204,15 @@ class Game {
             }
             if(this.currentRoom.westExit != null) {
                 this.out.print("west ");
+            }
+            if(this.currentRoom.upExit != null) {
+                this.out.print("up ");
+            }
+            if(this.currentRoom.downExit != null) {
+                this.out.print("down ");
+            }
+            if(this.currentRoom.teleportExit != null) {
+                this.out.print("teleport ");
             }
             this.out.println();
         }

@@ -9,7 +9,7 @@ class Help extends Command {
         this.game.out.println("around at the university.");
         this.game.out.println();
         this.game.out.println("Your command words are:");
-        this.game.out.println("   go quit help");
+        this.game.out.println("   go quit help look saveyourself");
         return false;
 }
 }

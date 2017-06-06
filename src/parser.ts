@@ -32,6 +32,7 @@ class Parser {
         this.commands["quit"] = new Quit(game);
         this.commands["go"] = new Go(game);
         this.commands["look"] = new Look(game);
+        this.commands["saveyourself"] = new Saveyourself(game);
         input.onkeyup = (e) => { // event handler function
             if (e.keyCode == 13 && this.game.isOn) {
                 // Invoke parse method wehen user pressed enter
@@ -52,6 +53,7 @@ class Parser {
      */
     parse(words : string[]) : void {
         let wantToQuit = false;
+        let SaveYourself = false;
         let params = words.slice(1);
         if (words[0] == "")
         
@@ -75,6 +77,8 @@ class Parser {
             this.input.disabled = true;
             this.game.gameOver();
         }
+        
+    
     }
 
 }
