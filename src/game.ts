@@ -77,9 +77,6 @@ class Game {
         // spawn player outside
         this.currentRoom = enterance;
 
-        if (this.currentRoom = valkuil1) {
-            console.log("graftak");
-        }
     }
         // Create the special options
     createSpecials() : void {

@@ -2,7 +2,7 @@ class Quit extends Command {
 
 
 //constructor
- constructor(game : Game)
+ execute(game : Game)
     {
         this.game = game;
     }
