@@ -14,8 +14,10 @@
  */
 class Parser {
     input : HTMLInputElement;
-    game : Game;
+    private game : Game;
 
+    commands : { [key: string]: Command }={};
+    default : Default;
     /**
      * Creates the parser object.
      * 
@@ -25,6 +27,10 @@ class Parser {
     constructor(game: Game, input : HTMLInputElement) {
         this.game = game;
         this.input = input;
+        this.default = new Default(game);
+        this.commands["help"] = new Help(game);
+        this.commands["quit"] = new Quit(game);
+        this.commands["go"] = new Go(game);
         input.onkeyup = (e) => { // event handler function
             if (e.keyCode == 13 && this.game.isOn) {
                 // Invoke parse method wehen user pressed enter
@@ -46,27 +52,24 @@ class Parser {
     parse(words : string[]) : void {
         let wantToQuit = false;
         let params = words.slice(1);
-        switch (words[0]) {
-            case "" :
-                // Do nothing when user enters nothing 
-                break
-            case "help" : 
-                wantToQuit = this.game.printHelp(params);
-                break;
-            case "go" :
-                wantToQuit = this.game.goRoom(params);
-                break;
-            case "quit" : 
-                wantToQuit = this.game.quit(params);
-                break;
-            case "look" :
-                wantToQuit = this.game.look(params);
-                break;
-            default :
-                // print an error when command is not known
-                wantToQuit = this.game.printError(params);
-
+        if (words[0] == "")
+        
+        {
+            return;
         }
+        
+        //find the command to execute
+        let command : Command;
+        command = this.commands[words[0]];
+        if ( command == null )
+        {
+            command = this.default;
+        }
+             
+        // print an error when command is not known
+         wantToQuit = command.execute(params);
+
+        
         if (wantToQuit) {
             this.input.disabled = true;
             this.game.gameOver();

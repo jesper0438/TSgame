@@ -44,39 +44,46 @@ class Game {
         let enterance = new Room("at the interance, welcome to the HZ-dungeon");
         let smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!")
         let lab = new Room("in a computing lab");
-        let valkuil1 = new Room("GAME OVER");
-        let valkuil2 =  new Room("GAME OVER");
-        let receptie = new Room("Bij de dames van de receptie");
-        let kantine = new Room("In de kantine");
-        let broodjes = new Room("bij de broodjesafdeling, wat een keuze!");
+        let valkuil1 = new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
+        let valkuil2 =  new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
+        let frontdesk = new Room("Bij de dames van de receptie");
+        let canteen = new Room("At the canteen");
+        let sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
         let elevator = new Room("bij de lift");
-        let verdieping1 = new Room("At the first floor");
-        let verdieping2 = new Room("At the second floor");
+        let firstfloor = new Room("At the first floor");
+        let secondfloor = new Room("At the second floor");
         let l202 = new Room("at L202");
         let l203 = new Room("at L203, don't get lost now...");
-
+        let basement = new Room("at the basement, nothing to see here.");
+        let breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
+        let pc1 = new Room("Computer1");
+        let pc2 = new Room("Computer2")
 
         // initialise room exits
-        enterance.setExits(smos, receptie, valkuil1, null, broodjes);
-        smos.setExits(null, null, null, null, null);
-        lab.setExits(null, null, kantine, null, null);
-        valkuil1.setExits(null, null, null, null, null);
-        valkuil2.setExits(null, null, null, null, null);
-        receptie.setExits(null, null, null, kantine, null);
-        broodjes.setExits(null, null, null, lab, null);
-        kantine.setExits(broodjes, null, null, lab, null);
-        elevator.setExits(lab, verdieping1, verdieping2, null, lab,);
-        verdieping1.setExits(verdieping2, null, null, null, null);
-        verdieping2.setExits(verdieping1, null, null, null, null);
-        l202.setExits(verdieping2, l203, null, null, null);
-        l203.setExits(verdieping1, null, null, null, null);
+        enterance.setExits(smos, frontdesk, valkuil1, null, null, null);
+        smos.setExits(breskens, null, enterance, null, null, null);
+        lab.setExits(pc2, pc1, canteen, null, null, null);
+        valkuil1.setExits(null, null, null, null, null, null);
+        valkuil2.setExits(null, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, null, enterance, null, null);
+        sandwichsection.setExits(null, null, null, lab, null, null);
+        canteen.setExits(lab, null, elevator, frontdesk, null, null);
+        elevator.setExits(firstfloor, secondfloor, basement, null, basement, null);
+        firstfloor.setExits(secondfloor, null, null, null, null, null);
+        secondfloor.setExits(firstfloor, null, null, null, null, null);
+        l202.setExits(secondfloor, l203, null, null, null, null);
+        l203.setExits(firstfloor, null, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
+
+        if (this.currentRoom = valkuil1) {
+            console.log("graftak");
+        }
     }
         // Create the special options
     createSpecials() : void {
-        let askforhelp = new Option("een broodje kroket");
+        let askforhelp = new Option("helpme");
         let teleport = new Option("Teleporteren");
         let plantflag = new Option("plant the flag");
     }   
@@ -108,6 +115,9 @@ class Game {
         if(this.currentRoom.upExit != null) {
             this.out.print("up ");
         }
+        if(this.currentRoom.downExit != null) {
+            this.out.print("down ");
+        }
         this.out.println();
         this.out.print(">");
     }
@@ -117,6 +127,7 @@ class Game {
         this.out.println("Thank you for playing.  Good bye.");
         this.out.println("Hit F5 to restart the game");
     }
+    
 
     /**
      * Print out error message when user enters unknown command.
@@ -126,13 +137,7 @@ class Game {
      * @param params array containing all parameters
      * @return true, if this command quits the game, false otherwise.
      */
-    printError(params : string[]) : boolean {
-        this.out.println("I don't know what you mean...");
-        this.out.println();
-        this.out.println("Your command words are:");
-        this.out.println("   go quit help");
-        return false;
-    }
+ 
 
     /**
      * Print out some help information.
@@ -142,18 +147,7 @@ class Game {
      * @param params array containing all parameters
      * @return true, if this command quits the game, false otherwise.
      */
-    printHelp(params : string[]) : boolean {
-        if(params.length > 0) {
-            this.out.println("Help what?");
-            return false;
-        }
-        this.out.println("You are lost. You are alone. You wander");
-        this.out.println("around at the university.");
-        this.out.println();
-        this.out.println("Your command words are:");
-        this.out.println("   go quit help");
-        return false;
-    }
+    
        
 
     /** 
@@ -195,6 +189,8 @@ class Game {
         if (nextRoom == null) {
             this.out.println("There is no door!");
         }
+        
+        
         else {
             this.currentRoom = nextRoom;
             this.out.println("You are " + this.currentRoom.description);
