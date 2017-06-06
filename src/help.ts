@@ -1,5 +1,5 @@
 class Help extends Command {
-   
+    
      execute(params : string[]) : boolean {
         if(params.length > 0) {
             this.game.out.println("Help what?");

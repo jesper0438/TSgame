@@ -1,6 +1,6 @@
 class Look extends Command
 {
     execute(params : string[]) : boolean {
-    this.out.println("You are " + this.currentRoom.description);
+    this.game.out.println("You are " + this.game.currentRoom.description);
     }
 }
