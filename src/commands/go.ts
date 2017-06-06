@@ -56,7 +56,19 @@ execute(params : string[]) : boolean {
             }
             if(this.game.currentRoom.westExit != null) {
                 this.game.out.print("west ");
+            }    
+            if(this.game.currentRoom.upExit != null) {
+                this.game.out.print("up");
+            }    
+            if(this.game.currentRoom.downExit != null) {
+                this.game.out.print("down");
             }
+            if(this.game.currentRoom.teleportExit != null) {
+                this.game.out.print("teleport");
+
+            }    
+            
+        
             this.game.out.println();
         }
         return false;
