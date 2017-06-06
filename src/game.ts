@@ -20,7 +20,7 @@ class Game {
     out : Printer;
 
     currentRoom : Room;
-    specialOptions: Special;
+    Teleport : Room;
 
     isOn : boolean;
 
@@ -33,7 +33,7 @@ class Game {
         this.isOn = true;
         this.createRooms();
         this.printWelcome();
-        this.createSpecials();
+        
     }
 
     /**
@@ -58,33 +58,32 @@ class Game {
         let breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
         let pc1 = new Room("Computer1");
         let pc2 = new Room("Computer2")
+        let freedom = new Room("Free, you win!")
+        let flag = new Room("At the flag, congratz! Telport now")
 
         // initialise room exits
-        enterance.setExits(smos, frontdesk, valkuil1, null, null, null);
-        smos.setExits(breskens, null, enterance, null, null, null);
-        lab.setExits(pc2, pc1, canteen, null, null, null);
-        valkuil1.setExits(null, null, null, null, null, null);
-        valkuil2.setExits(null, null, null, null, null, null);
-        frontdesk.setExits(null, canteen, null, enterance, null, null);
-        sandwichsection.setExits(null, null, null, lab, null, null);
-        canteen.setExits(lab, null, elevator, frontdesk, null, null);
-        elevator.setExits(firstfloor, secondfloor, basement, null, basement, null);
-        firstfloor.setExits(secondfloor, null, null, null, null, null);
-        secondfloor.setExits(firstfloor, null, null, null, null, null);
-        l202.setExits(secondfloor, l203, null, null, null, null);
-        l203.setExits(firstfloor, null, null, null, null, null);
+        enterance.setExits(smos, frontdesk, valkuil1, null, null, null, freedom);
+        smos.setExits(breskens, null, enterance, null, null, null, null);
+        lab.setExits(pc2, pc1, canteen, null, null, null, null);
+        valkuil1.setExits(null, null, null, null, null, null, null);
+        valkuil2.setExits(null, null, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, null, enterance, null, null, null);
+        sandwichsection.setExits(null, null, null, lab, null, null, null);
+        canteen.setExits(lab, null, elevator, frontdesk, null, null, null);
+        elevator.setExits(firstfloor, secondfloor, basement, null, basement, null, null);
+        firstfloor.setExits(secondfloor, null, null, null, null, null, null);
+        secondfloor.setExits(firstfloor, null, null, null, null, null, null);
+        l202.setExits(secondfloor, l203, null, null, null, null, null);
+        l203.setExits(firstfloor, null, null, null, null, null, null);
+        flag.setExits(null, null, null, null, null, null, freedom);
+        freedom.setExits(null, null, null, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
 
+
     }
-        // Create the special options
-    createSpecials() : void {
-        let askforhelp = new Option("helpme");
-        let teleport = new Option("Teleporteren");
-        let plantflag = new Option("plant the flag");
-    }   
-        // initalise special options
+       
         
     /**
      * Print out the opening message for the player.
@@ -115,16 +114,18 @@ class Game {
         if(this.currentRoom.downExit != null) {
             this.out.print("down ");
         }
+        if(this.currentRoom.teleportExit != null) {
+            this.out.print("teleport ");
+        }
         this.out.println();
         this.out.print(">");
     }
 
-    gameOver() : void {
+ gameOver() : void {
         this.isOn = false;
         this.out.println("Thank you for playing.  Good bye.");
         this.out.println("Hit F5 to restart the game");
-    }
-    
+    }    
 
     /**
      * Print out error message when user enters unknown command.
@@ -134,17 +135,8 @@ class Game {
      * @param params array containing all parameters
      * @return true, if this command quits the game, false otherwise.
      */
- 
 
-    /**
-     * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the 
-     * command words.
-     * 
-     * @param params array containing all parameters
-     * @return true, if this command quits the game, false otherwise.
-     */
-    
+   
        
 
     /** 

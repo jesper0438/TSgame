@@ -27,6 +27,12 @@ execute(params : string[]) : boolean {
             case "up" : 
                 nextRoom = this.game.currentRoom.upExit;
                 break;
+            case "down" :
+                nextRoom = this.game.currentRoom.downExit;
+                break;
+            case "teleport" :
+                nextRoom = this.game.currentRoom.teleportExit;
+                break;
         }
 
         if (nextRoom == null) {
