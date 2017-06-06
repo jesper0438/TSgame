@@ -47,7 +47,7 @@ class Game {
         let frontdesk = new Room("Bij de dames van de receptie");
         let canteen = new Room("At the canteen");
         let sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
-        let elevator = new Room("bij de lift");
+        let elevator = new Room("In the elevator");
         let firstfloor = new Room("At the first floor");
         let secondfloor = new Room("At the second floor");
         let l202 = new Room("at L202");
@@ -68,8 +68,8 @@ class Game {
         frontdesk.setExits(null, canteen, null, enterance, null, null, null);
         sandwichsection.setExits(null, null, null, lab, null, null, null);
         canteen.setExits(lab, null, elevator, frontdesk, null, null, null);
-        elevator.setExits(firstfloor, secondfloor, basement, null, basement, null, null);
-        firstfloor.setExits(secondfloor, null, null, null, null, null, null);
+        elevator.setExits(firstfloor, secondfloor, basement, null, firstfloor, basement, null);
+        firstfloor.setExits(null, null, null, null, secondfloor, null, null);
         secondfloor.setExits(firstfloor, null, null, null, null, null, null);
         l202.setExits(secondfloor, l203, null, null, null, null, null);
         l203.setExits(firstfloor, null, null, null, null, null, null);
