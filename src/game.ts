@@ -60,21 +60,23 @@ class Game {
         let flag = new Room("At the flag, congratz! Telport now")
 
         // initialise room exits
-        enterance.setExits(smos, frontdesk, valkuil1, null, null, null, freedom);
-        smos.setExits(breskens, null, enterance, null, null, null, null);
-        lab.setExits(pc2, pc1, canteen, null, null, null, null);
-        valkuil1.setExits(null, null, null, null, null, null, null);
-        valkuil2.setExits(null, null, null, null, null, null, null);
-        frontdesk.setExits(null, canteen, null, enterance, null, null, null);
-        sandwichsection.setExits(null, null, null, lab, null, null, null);
-        canteen.setExits(lab, null, elevator, frontdesk, null, null, null);
-        elevator.setExits(firstfloor, secondfloor, basement, null, firstfloor, basement, null);
-        firstfloor.setExits(null, null, null, null, secondfloor, null, null);
-        secondfloor.setExits(firstfloor, null, null, null, null, null, null);
-        l202.setExits(secondfloor, l203, null, null, null, null, null);
-        l203.setExits(firstfloor, null, null, null, null, null, null);
-        flag.setExits(null, null, null, null, null, null, freedom);
-        freedom.setExits(null, null, null, null, null, null, null);
+        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, freedom, null);
+        smos.setExits(breskens, null, enterance, null, null, null, null, null);
+        lab.setExits(pc2, pc1, canteen, null, null, null, null, null);
+        valkuil1.setExits(null, null, null, null, null, null, null, null);
+        valkuil2.setExits(null, null, null, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null);
+        sandwichsection.setExits(null, null, null, lab, null, null, null, null);
+        canteen.setExits(lab, null, elevator, frontdesk, null, null, null, null);
+        elevator.setExits(firstfloor, secondfloor, basement, null, firstfloor, basement, null, null);
+        firstfloor.setExits(null, null, null, null, secondfloor, null, null, null);
+        secondfloor.setExits(firstfloor, null, null, null, null, null, null, null);
+        l202.setExits(secondfloor, l203, null, null, null, null, null, null);
+        l203.setExits(firstfloor, null, null, null, null, null, null, null);
+        flag.setExits(null, null, null, null, null, null, freedom, null);
+        freedom.setExits(null, null, null, null, null, null, null, null);
+        pc1.setExits(null, null, null, null, null, null, null, null);
+        pc2.setExits(null, null, null, null, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
@@ -90,7 +92,7 @@ class Game {
         this.out.println();
         this.out.println("You are in the HZ Dungeon of Applied Sciences");
         this.out.println("Plant the flag and get out as soon as possible!");
-        this.out.println("Type 'help' if you need help.");
+        this.out.println("First type instructions for an explanation.");
         this.out.println();
         this.out.println("You are " + this.currentRoom.description);
         this.out.print("Exits: ");
@@ -114,6 +116,9 @@ class Game {
         }
         if(this.currentRoom.teleportExit != null) {
             this.out.print("teleport ");
+        }
+        if(this.currentRoom.loginExit != null) {
+            this.out.print("login ");
         }
         this.out.println();
         this.out.print(">");
@@ -182,6 +187,9 @@ class Game {
             case "teleport" : 
                 nextRoom = this.currentRoom.teleportExit;
                 break;
+            case "login" : 
+                nextRoom = this.currentRoom.loginExit;
+                break;    
         }
 
         if (nextRoom == null) {
@@ -213,6 +221,9 @@ class Game {
             }
             if(this.currentRoom.teleportExit != null) {
                 this.out.print("teleport ");
+            }
+            if(this.currentRoom.loginExit != null) {
+                this.out.print("login ");
             }
             this.out.println();
         }

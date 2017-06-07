@@ -22,6 +22,7 @@ class Room {
     upExit : Room;
     downExit : Room;
     teleportExit : Room;
+    loginExit : Room;
 
     /**
      * Create a room described "description". Initially, it has
@@ -43,8 +44,9 @@ class Room {
      * @param up Going up with elevator.
      * @param down Going down with elevator
      * @param teleport Teleport to freedom
+     * @param login Login to computer
      */
-    setExits(north : Room, east : Room, south : Room, west : Room, up : Room, down : Room, teleport : Room) : void {
+    setExits(north : Room, east : Room, south : Room, west : Room, up : Room, down : Room, teleport : Room, login : Room) : void {
         if(north != null) {
             this.northExit = north;
         }
@@ -65,6 +67,9 @@ class Room {
         }
         if(teleport !=null) {
             this.teleportExit = teleport;
+        }
+        if(teleport !=null) {
+            this.loginExit = login;
         }
     }
 
