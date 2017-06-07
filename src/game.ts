@@ -49,6 +49,7 @@ class Game {
         let sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
         let elevator = new Room("In the elevator");
         let firstfloor = new Room("At the first floor");
+        let thirdfloor = new Room("At the third floor, find the flag!");
         let secondfloor = new Room("At the second floor");
         let l202 = new Room("at L202");
         let l203 = new Room("at L203, don't get lost now...");
@@ -74,7 +75,6 @@ class Game {
         l202.setExits(secondfloor, l203, null, null, null, null, null, null);
         l203.setExits(firstfloor, null, null, null, null, null, null, null);
         flag.setExits(null, null, null, null, null, null, freedom, null);
-        freedom.setExits(null, null, null, null, null, null, null, null);
         pc1.setExits(null, null, null, null, null, null, null, null);
         pc2.setExits(null, null, null, null, null, null, null, null);
 
