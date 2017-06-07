@@ -7,7 +7,7 @@ class Saveyourself extends Command {
         }
         else {        
                  this.game.isOn = false;
-                 this.game.out.println("doei");
+                 this.game.out.println("You Saved Yourself From a lifetime in this room. But you failed to plant the flag.");
                  this.game.out.println("Press F5 to restart");
             }
         }
