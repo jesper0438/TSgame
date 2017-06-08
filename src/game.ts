@@ -20,6 +20,7 @@ class Game {
     out : Printer;
 
     currentRoom : Room;
+    respawnRoom : Room;
     isOn : boolean;
 
     /**
@@ -56,9 +57,9 @@ class Game {
         let basement = new Room("at the basement, nothing to see here.");
         let breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
         let pc1 = new Room("Computer1, type in login");
-        let pc2 = new Room("Computer2, type in inloggen")
-        let freedom = new Room("Free, you win!")
-        let flag = new Room("At the flag, congratz! Telport now")
+        let pc2 = new Room("Computer2, type in inloggen or login");
+        let freedom = new Room("Free, you win!");
+        let flag = new Room("At the flag, congratz! Telport now");
 
         // initialise room exits
         enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null, null);
@@ -81,6 +82,7 @@ class Game {
 
         // spawn player outside
         this.currentRoom = enterance;
+        this.respawnRoom = roof;
     }
        
         

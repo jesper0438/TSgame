@@ -57,7 +57,7 @@ var Game = (function () {
         var basement = new Room("at the basement, nothing to see here.");
         var breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
         var pc1 = new Room("Computer1, type in login");
-        var pc2 = new Room("Computer2, type in inloggen");
+        var pc2 = new Room("Computer2, type in inloggen or login");
         var freedom = new Room("Free, you win!");
         var flag = new Room("At the flag, congratz! Telport now");
         enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null, null);
@@ -78,6 +78,7 @@ var Game = (function () {
         pc1.setExits(null, null, null, null, null, null, null, null, null);
         pc2.setExits(null, null, null, null, null, null, null, null, null);
         this.currentRoom = enterance;
+        this.respawnRoom = roof;
     };
     Game.prototype.printWelcome = function () {
         this.out.println();
@@ -218,6 +219,7 @@ var Parser = (function () {
         this.commands["instructions"] = new Instructions(game);
         this.commands["login"] = new Login(game);
         this.commands["inloggen"] = new Inloggen(game);
+        this.commands["respawn"] = new Respawn(game);
         input.onkeyup = function (e) {
             if (e.keyCode == 13 && _this.game.isOn) {
                 var command = _this.input.value;
@@ -396,7 +398,12 @@ var Inloggen = (function (_super) {
             return false;
         }
         this.game.out.println("Are your files are encrypted");
-        this.game.out.println();
+        this.game.out.println("Please send 1BTC or $2933 to 1BoatSLRHtKNngkdXEeobR76b53LETtpyT");
+        this.game.out.println("Are your files are encrypted");
+        this.game.out.println("Please send 1BTC or $2933 to 1BoatSLRHtKNngkdXEeobR76b53LETtpyT");
+        this.game.out.println("Are your files are encrypted");
+        this.game.out.println("Belangrijke bestanden geproduceerd op uw computer, foto’s, video’s,");
+        this.game.out.println(" documenten en dergelijke, werden geëncrypteerd. Hier is een volledige lijst van geëncrypteerde bestanden, en u kan dit persoonlijk verifiëren.");
         return false;
     };
     return Inloggen;
@@ -411,11 +418,9 @@ var Instructions = (function (_super) {
             this.game.out.println("Help what?");
             return false;
         }
-        this.game.out.println("around at the university.");
-        this.game.out.println();
         this.game.out.println("Your command words are:");
         this.game.out.println("Go | North, South, East, West, Up, Down,Teleport, or login.");
-        this.game.out.println("around at the university.");
+        this.game.out.println("Go to the roof with the elevator, plant the flag and teleport to freedom.");
         return false;
     };
     return Instructions;
@@ -461,6 +466,19 @@ var Quit = (function (_super) {
         }
     };
     return Quit;
+}(Command));
+var Respawn = (function (_super) {
+    __extends(Respawn, _super);
+    function Respawn() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Respawn.prototype.execute = function (params) {
+        this.game.createRooms();
+        this.game.currentRoom = this.game.respawnRoom;
+        this.game.out.println("you are " + this.game.currentRoom.description);
+        return false;
+    };
+    return Respawn;
 }(Command));
 var Saveyourself = (function (_super) {
     __extends(Saveyourself, _super);

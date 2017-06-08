@@ -36,6 +36,7 @@ class Parser {
         this.commands["instructions"] = new Instructions(game);
         this.commands["login"] = new Login(game);
         this.commands["inloggen"] = new Inloggen(game);
+        this.commands["respawn"] = new Respawn(game);
         input.onkeyup = (e) => { // event handler function
             if (e.keyCode == 13 && this.game.isOn) {
                 // Invoke parse method wehen user pressed enter
