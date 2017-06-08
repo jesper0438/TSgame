@@ -49,7 +49,7 @@ class Game {
         let sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
         let elevator = new Room("In the elevator");
         let firstfloor = new Room("At the first floor");
-        let thirdfloor = new Room("At the third floor, find the flag!");
+        let roof = new Room("At the third floor, find the flag!");
         let secondfloor = new Room("At the second floor");
         let l202 = new Room("at L202");
         let l203 = new Room("at L203, don't get lost now...");
@@ -61,7 +61,7 @@ class Game {
         let flag = new Room("At the flag, congratz! Telport now")
 
         // initialise room exits
-        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, freedom, null);
+        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null);
         smos.setExits(breskens, null, enterance, null, null, null, null, null);
         lab.setExits(pc2, pc1, canteen, null, null, null, null, null);
         valkuil1.setExits(null, null, null, null, null, null, null, null);
@@ -71,7 +71,8 @@ class Game {
         canteen.setExits(lab, null, elevator, frontdesk, null, null, null, null);
         elevator.setExits(firstfloor, secondfloor, basement, null, firstfloor, basement, null, null);
         firstfloor.setExits(null, null, null, null, secondfloor, null, null, null);
-        secondfloor.setExits(firstfloor, null, null, null, null, null, null, null);
+        secondfloor.setExits(null, null, null, null, roof, firstfloor, null, null);
+        roof.setExits(null, flag, null, null, null, null, null, null);
         l202.setExits(secondfloor, l203, null, null, null, null, null, null);
         l203.setExits(firstfloor, null, null, null, null, null, null, null);
         flag.setExits(null, null, null, null, null, null, freedom, null);
@@ -80,8 +81,6 @@ class Game {
 
         // spawn player outside
         this.currentRoom = enterance;
-
-
     }
        
         
