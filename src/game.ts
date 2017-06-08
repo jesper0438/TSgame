@@ -55,29 +55,29 @@ class Game {
         let l203 = new Room("at L203, don't get lost now...");
         let basement = new Room("at the basement, nothing to see here.");
         let breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
-        let pc1 = new Room("Computer1");
-        let pc2 = new Room("Computer2")
+        let pc1 = new Room("Computer1, type in login");
+        let pc2 = new Room("Computer2, type in inloggen")
         let freedom = new Room("Free, you win!")
         let flag = new Room("At the flag, congratz! Telport now")
 
         // initialise room exits
-        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null);
-        smos.setExits(breskens, null, enterance, null, null, null, null, null);
-        lab.setExits(pc2, pc1, canteen, null, null, null, null, null);
-        valkuil1.setExits(null, null, null, null, null, null, null, null);
-        valkuil2.setExits(null, null, null, null, null, null, null, null);
-        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null);
-        sandwichsection.setExits(null, null, null, lab, null, null, null, null);
-        canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null);
-        elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null);
-        firstfloor.setExits(null, null, null, null, secondfloor, null, null, null);
-        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null);
-        roof.setExits(null, flag, null, null, null, null, null, null);
-        l202.setExits(secondfloor, l203, null, null, null, null, null, null);
-        l203.setExits(firstfloor, null, null, null, null, null, null, null);
-        flag.setExits(null, null, null, null, null, null, freedom, null);
-        pc1.setExits(null, null, null, null, null, null, null, null);
-        pc2.setExits(null, null, null, null, null, null, null, null);
+        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null, null);
+        smos.setExits(breskens, null, enterance, null, null, null, null, null, null);
+        lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
+        valkuil1.setExits(null, null, null, null, null, null, null, null, null);
+        valkuil2.setExits(null, null, null, null, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null, null);
+        sandwichsection.setExits(null, null, null, lab, null, null, null, null, null);
+        canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null, null);
+        elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
+        firstfloor.setExits(null, null, null, null, secondfloor, null, null, null, null);
+        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null, null);
+        roof.setExits(null, flag, null, null, null, null, null, null, null);
+        l202.setExits(secondfloor, l203, null, null, null, null, null, null, null);
+        l203.setExits(firstfloor, null, null, null, null, null, null, null, null);
+        flag.setExits(null, null, null, null, null, null, freedom, null, null);
+        pc1.setExits(null, null, null, null, null, null, null, null, null);
+        pc2.setExits(null, null, null, null, null, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
@@ -118,6 +118,9 @@ class Game {
         }
         if(this.currentRoom.loginExit != null) {
             this.out.print("login ");
+        }
+        if(this.currentRoom.inloggenExit != null) {
+            this.out.print("inloggen ");
         }
         this.out.println();
         this.out.print(">");
@@ -188,7 +191,10 @@ class Game {
                 break;
             case "login" : 
                 nextRoom = this.currentRoom.loginExit;
-                break;    
+                break;
+            case "inloggen" : 
+                nextRoom = this.currentRoom.inloggenExit;
+                break;        
         }
 
         if (nextRoom == null) {
@@ -223,6 +229,9 @@ class Game {
             }
             if(this.currentRoom.loginExit != null) {
                 this.out.print("login ");
+            }
+            if(this.currentRoom.inloggenExit != null) {
+                this.out.print("inloggen ");
             }
             this.out.println();
         }

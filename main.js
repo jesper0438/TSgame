@@ -56,27 +56,27 @@ var Game = (function () {
         var l203 = new Room("at L203, don't get lost now...");
         var basement = new Room("at the basement, nothing to see here.");
         var breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
-        var pc1 = new Room("Computer1");
-        var pc2 = new Room("Computer2");
+        var pc1 = new Room("Computer1, type in login");
+        var pc2 = new Room("Computer2, type in inloggen");
         var freedom = new Room("Free, you win!");
         var flag = new Room("At the flag, congratz! Telport now");
-        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null);
-        smos.setExits(breskens, null, enterance, null, null, null, null, null);
-        lab.setExits(pc2, pc1, canteen, null, null, null, null, null);
-        valkuil1.setExits(null, null, null, null, null, null, null, null);
-        valkuil2.setExits(null, null, null, null, null, null, null, null);
-        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null);
-        sandwichsection.setExits(null, null, null, lab, null, null, null, null);
-        canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null);
-        elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null);
-        firstfloor.setExits(null, null, null, null, secondfloor, null, null, null);
-        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null);
-        roof.setExits(null, flag, null, null, null, null, null, null);
-        l202.setExits(secondfloor, l203, null, null, null, null, null, null);
-        l203.setExits(firstfloor, null, null, null, null, null, null, null);
-        flag.setExits(null, null, null, null, null, null, freedom, null);
-        pc1.setExits(null, null, null, null, null, null, null, null);
-        pc2.setExits(null, null, null, null, null, null, null, null);
+        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null, null);
+        smos.setExits(breskens, null, enterance, null, null, null, null, null, null);
+        lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
+        valkuil1.setExits(null, null, null, null, null, null, null, null, null);
+        valkuil2.setExits(null, null, null, null, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null, null);
+        sandwichsection.setExits(null, null, null, lab, null, null, null, null, null);
+        canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null, null);
+        elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
+        firstfloor.setExits(null, null, null, null, secondfloor, null, null, null, null);
+        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null, null);
+        roof.setExits(null, flag, null, null, null, null, null, null, null);
+        l202.setExits(secondfloor, l203, null, null, null, null, null, null, null);
+        l203.setExits(firstfloor, null, null, null, null, null, null, null, null);
+        flag.setExits(null, null, null, null, null, null, freedom, null, null);
+        pc1.setExits(null, null, null, null, null, null, null, null, null);
+        pc2.setExits(null, null, null, null, null, null, null, null, null);
         this.currentRoom = enterance;
     };
     Game.prototype.printWelcome = function () {
@@ -110,6 +110,9 @@ var Game = (function () {
         }
         if (this.currentRoom.loginExit != null) {
             this.out.print("login ");
+        }
+        if (this.currentRoom.inloggenExit != null) {
+            this.out.print("inloggen ");
         }
         this.out.println();
         this.out.print(">");
@@ -156,6 +159,9 @@ var Game = (function () {
             case "login":
                 nextRoom = this.currentRoom.loginExit;
                 break;
+            case "inloggen":
+                nextRoom = this.currentRoom.inloggenExit;
+                break;
         }
         if (nextRoom == null) {
             this.out.println("There is no door!");
@@ -187,6 +193,9 @@ var Game = (function () {
             }
             if (this.currentRoom.loginExit != null) {
                 this.out.print("login ");
+            }
+            if (this.currentRoom.inloggenExit != null) {
+                this.out.print("inloggen ");
             }
             this.out.println();
         }
@@ -220,6 +229,7 @@ var Parser = (function () {
         this.commands["saveyourself"] = new Saveyourself(game);
         this.commands["instructions"] = new Instructions(game);
         this.commands["login"] = new Login(game);
+        this.commands["inloggen"] = new Inloggen(game);
         input.onkeyup = function (e) {
             if (e.keyCode == 13 && _this.game.isOn) {
                 var command = _this.input.value;
@@ -268,7 +278,7 @@ var Room = (function () {
     function Room(description) {
         this.description = description;
     }
-    Room.prototype.setExits = function (north, east, south, west, up, down, teleport, login) {
+    Room.prototype.setExits = function (north, east, south, west, up, down, teleport, login, inloggen) {
         if (north != null) {
             this.northExit = north;
         }
@@ -292,6 +302,9 @@ var Room = (function () {
         }
         if (teleport != null) {
             this.loginExit = login;
+        }
+        if (teleport != null) {
+            this.inloggenExit = inloggen;
         }
     };
     return Room;
@@ -383,6 +396,22 @@ var Help = (function (_super) {
         return false;
     };
     return Help;
+}(Command));
+var Inloggen = (function (_super) {
+    __extends(Inloggen, _super);
+    function Inloggen() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Inloggen.prototype.execute = function (params) {
+        if (params.length > 0) {
+            this.game.out.println("Login what?");
+            return false;
+        }
+        this.game.out.println("Are your files are encrypted");
+        this.game.out.println();
+        return false;
+    };
+    return Inloggen;
 }(Command));
 var Instructions = (function (_super) {
     __extends(Instructions, _super);
