@@ -201,18 +201,6 @@ var Game = (function () {
         }
         return false;
     };
-    Game.prototype.quit = function (params) {
-        if (params.length > 0) {
-            this.out.println("Quit what?");
-            return false;
-        }
-        else {
-            return true;
-        }
-    };
-    Game.prototype.look = function (params) {
-        this.out.println("You are " + this.currentRoom.description);
-    };
     return Game;
 }());
 var Parser = (function () {

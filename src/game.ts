@@ -245,16 +245,4 @@ class Game {
      * @param params array containing all parameters
      * @return true, if this command quits the game, false otherwise.
      */
-   private quit(params : string[]) : boolean {
-        if(params.length > 0) {
-            this.out.println("Quit what?");
-            return false;
-        }
-        else {
-            return true;  // signal that we want to quit
-        }
-    }
-    private look(params : string[]) : boolean {
-        this.out.println("You are " + this.currentRoom.description);
-    }
 }
