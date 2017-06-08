@@ -65,7 +65,7 @@ var Game = (function () {
         lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
         valkuil1.setExits(null, null, null, null, null, null, null, null, null);
         valkuil2.setExits(null, null, null, null, null, null, null, null, null);
-        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, elevator, enterance, null, null, null, null, null);
         sandwichsection.setExits(null, null, null, lab, null, null, null, null, null);
         canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null, null);
         elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
@@ -78,7 +78,7 @@ var Game = (function () {
         pc1.setExits(null, null, null, null, null, null, null, null, null);
         pc2.setExits(null, null, null, null, null, null, null, null, null);
         this.currentRoom = enterance;
-        this.respawnRoom = roof;
+        this.respawnRoom = smos;
     };
     Game.prototype.printWelcome = function () {
         this.out.println();
@@ -473,7 +473,6 @@ var Respawn = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Respawn.prototype.execute = function (params) {
-        this.game.createRooms();
         this.game.currentRoom = this.game.respawnRoom;
         this.game.out.println("you are " + this.game.currentRoom.description);
         return false;

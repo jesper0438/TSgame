@@ -67,7 +67,7 @@ class Game {
         lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
         valkuil1.setExits(null, null, null, null, null, null, null, null, null);
         valkuil2.setExits(null, null, null, null, null, null, null, null, null);
-        frontdesk.setExits(null, canteen, null, enterance, null, null, null, null, null);
+        frontdesk.setExits(null, canteen, elevator, enterance, null, null, null, null, null);
         sandwichsection.setExits(null, null, null, lab, null, null, null, null, null);
         canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null, null);
         elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
@@ -82,7 +82,7 @@ class Game {
 
         // spawn player outside
         this.currentRoom = enterance;
-        this.respawnRoom = roof;
+        this.respawnRoom = smos;
     }
        
         
