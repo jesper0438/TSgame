@@ -68,10 +68,10 @@ class Game {
         valkuil2.setExits(null, null, null, null, null, null, null, null);
         frontdesk.setExits(null, canteen, null, enterance, null, null, null, null);
         sandwichsection.setExits(null, null, null, lab, null, null, null, null);
-        canteen.setExits(lab, null, elevator, frontdesk, null, null, null, null);
-        elevator.setExits(firstfloor, secondfloor, basement, null, firstfloor, basement, null, null);
+        canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null);
+        elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null);
         firstfloor.setExits(null, null, null, null, secondfloor, null, null, null);
-        secondfloor.setExits(null, null, null, null, roof, firstfloor, null, null);
+        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null);
         roof.setExits(null, flag, null, null, null, null, null, null);
         l202.setExits(secondfloor, l203, null, null, null, null, null, null);
         l203.setExits(firstfloor, null, null, null, null, null, null, null);
