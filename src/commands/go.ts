@@ -30,9 +30,6 @@ execute(params : string[]) : boolean {
             case "down" :
                 nextRoom = this.game.currentRoom.downExit;
                 break;
-            case "teleport" :
-                nextRoom = this.game.currentRoom.teleportExit;
-                break;
         }
 
         if (nextRoom == null) {
@@ -63,10 +60,6 @@ execute(params : string[]) : boolean {
             if(this.game.currentRoom.downExit != null) {
                 this.game.out.print("down");
             }
-            if(this.game.currentRoom.teleportExit != null) {
-                this.game.out.print("teleport");
-
-            }    
             
         
             this.game.out.println();

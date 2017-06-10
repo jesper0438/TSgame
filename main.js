@@ -26,7 +26,7 @@ var Default = (function (_super) {
         this.game.out.println("I don't know what you mean...");
         this.game.out.println();
         this.game.out.println("Your command words are:");
-        this.game.out.println("   go quit help saveyourself look");
+        this.game.out.println("   go quit help saveyourself look teleport");
         return false;
     };
     return Default;
@@ -106,9 +106,6 @@ var Game = (function () {
         if (this.currentRoom.downExit != null) {
             this.out.print("down ");
         }
-        if (this.currentRoom.teleportExit != null) {
-            this.out.print("teleport ");
-        }
         if (this.currentRoom.loginExit != null) {
             this.out.print("login ");
         }
@@ -154,9 +151,6 @@ var Game = (function () {
             case "down":
                 nextRoom = this.currentRoom.downExit;
                 break;
-            case "teleport":
-                nextRoom = this.currentRoom.teleportExit;
-                break;
             case "login":
                 nextRoom = this.currentRoom.loginExit;
                 break;
@@ -189,9 +183,6 @@ var Game = (function () {
             if (this.currentRoom.downExit != null) {
                 this.out.print("down ");
             }
-            if (this.currentRoom.teleportExit != null) {
-                this.out.print("teleport ");
-            }
             if (this.currentRoom.loginExit != null) {
                 this.out.print("login ");
             }
@@ -219,7 +210,7 @@ var Parser = (function () {
         this.commands["instructions"] = new Instructions(game);
         this.commands["login"] = new Login(game);
         this.commands["inloggen"] = new Inloggen(game);
-        this.commands["respawn"] = new Respawn(game);
+        this.commands["teleport"] = new Teleport(game);
         input.onkeyup = function (e) {
             if (e.keyCode == 13 && _this.game.isOn) {
                 var command = _this.input.value;
@@ -288,9 +279,6 @@ var Room = (function () {
             this.downExit = down;
         }
         if (teleport != null) {
-            this.teleportExit = teleport;
-        }
-        if (teleport != null) {
             this.loginExit = login;
         }
         if (teleport != null) {
@@ -330,9 +318,6 @@ var Go = (function (_super) {
             case "down":
                 nextRoom = this.game.currentRoom.downExit;
                 break;
-            case "teleport":
-                nextRoom = this.game.currentRoom.teleportExit;
-                break;
         }
         if (nextRoom == null) {
             this.game.out.println("There is no door!");
@@ -358,9 +343,6 @@ var Go = (function (_super) {
             }
             if (this.game.currentRoom.downExit != null) {
                 this.game.out.print("down");
-            }
-            if (this.game.currentRoom.teleportExit != null) {
-                this.game.out.print("teleport");
             }
             this.game.out.println();
         }
@@ -467,18 +449,6 @@ var Quit = (function (_super) {
     };
     return Quit;
 }(Command));
-var Respawn = (function (_super) {
-    __extends(Respawn, _super);
-    function Respawn() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Respawn.prototype.execute = function (params) {
-        this.game.currentRoom = this.game.respawnRoom;
-        this.game.out.println("you are " + this.game.currentRoom.description);
-        return false;
-    };
-    return Respawn;
-}(Command));
 var Saveyourself = (function (_super) {
     __extends(Saveyourself, _super);
     function Saveyourself() {
@@ -496,4 +466,16 @@ var Saveyourself = (function (_super) {
         }
     };
     return Saveyourself;
+}(Command));
+var Teleport = (function (_super) {
+    __extends(Teleport, _super);
+    function Teleport() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Teleport.prototype.execute = function (params) {
+        this.game.currentRoom = this.game.respawnRoom;
+        this.game.out.println("you are teleported  " + this.game.currentRoom.description);
+        return false;
+    };
+    return Teleport;
 }(Command));

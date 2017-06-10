@@ -21,7 +21,6 @@ class Room {
     westExit : Room;
     upExit : Room;
     downExit : Room;
-    teleportExit : Room;
     loginExit : Room;
     inloggenExit : Room;
 
@@ -66,9 +65,6 @@ class Room {
         }
         if(down !=null) {
             this.downExit = down;
-        }
-        if(teleport !=null) {
-            this.teleportExit = teleport;
         }
         if(teleport !=null) {
             this.loginExit = login;

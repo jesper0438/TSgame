@@ -1,8 +1,8 @@
-class Respawn extends Command {
+class Teleport extends Command {
 
    execute(params : string[]) : boolean {
        this.game.currentRoom = this.game.respawnRoom;
-       this.game.out.println( "you are " + this.game.currentRoom.description);
+       this.game.out.println( "you are teleported  " + this.game.currentRoom.description);
        return false;
         
     }

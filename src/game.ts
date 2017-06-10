@@ -115,9 +115,6 @@ class Game {
         if(this.currentRoom.downExit != null) {
             this.out.print("down ");
         }
-        if(this.currentRoom.teleportExit != null) {
-            this.out.print("teleport ");
-        }
         if(this.currentRoom.loginExit != null) {
             this.out.print("login ");
         }
@@ -188,9 +185,6 @@ class Game {
             case "down" : 
                 nextRoom = this.currentRoom.downExit;
                 break;
-            case "teleport" : 
-                nextRoom = this.currentRoom.teleportExit;
-                break;
             case "login" : 
                 nextRoom = this.currentRoom.loginExit;
                 break;
@@ -226,9 +220,7 @@ class Game {
             if(this.currentRoom.downExit != null) {
                 this.out.print("down ");
             }
-            if(this.currentRoom.teleportExit != null) {
-                this.out.print("teleport ");
-            }
+            
             if(this.currentRoom.loginExit != null) {
                 this.out.print("login ");
             }
