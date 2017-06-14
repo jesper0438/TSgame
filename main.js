@@ -45,21 +45,21 @@ var Game = (function () {
         var lab = new Room("in a computing lab");
         var valkuil1 = new Room("Not paying atention. You fell from the roof! Please press F5 to restart the game.");
         var valkuil2 = new Room("Trapped! You can use the 'teleport' command or restart de game!");
-        var frontdesk = new Room("Bij de dames van de receptie");
-        var canteen = new Room("At the canteen");
+        var frontdesk = new Room("at the ladies from the frontdesk");
+        var canteen = new Room("at the canteen");
         var sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
-        var elevator = new Room("In the elevator");
-        var firstfloor = new Room("At the first floor");
-        var roof = new Room("At the third floor, find the flag!");
-        var secondfloor = new Room("At the second floor");
+        var elevator = new Room("in the elevator");
+        var firstfloor = new Room("at the first floor");
+        var roof = new Room("at the third floor, find the flag!");
+        var secondfloor = new Room("at the second floor");
         var l202 = new Room("at L202");
         var l203 = new Room("at L203, don't get lost now...");
         var basement = new Room("at the basement, nothing to see here.");
-        var breskens = new Room("In Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
-        var pc1 = new Room("Computer1, type in login");
-        var pc2 = new Room("Computer2, type in inloggen or login");
-        var freedom = new Room("Free, you win!");
-        var flag = new Room("At the flag, congratz! Telport now");
+        var breskens = new Room("in Zeeuws-Vlaanderen, game over... Please press F5 to restart and mind your steps...");
+        var pc1 = new Room("computer1, type in login");
+        var pc2 = new Room("computer2, type in inloggen or login");
+        var freedom = new Room("freedom, you win!");
+        var flag = new Room("at the flag. Type 'freedom' to plant the flag and finish.");
         enterance.setExits(smos, frontdesk, null, null, null, null, null, null, null);
         smos.setExits(breskens, null, enterance, null, null, null, null, null, null);
         lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
@@ -80,6 +80,7 @@ var Game = (function () {
         basement.setExits(null, null, null, null, elevator, null, null, null, null);
         this.currentRoom = enterance;
         this.respawnRoom = smos;
+        this.freedomRoom = freedom;
     };
     Game.prototype.printWelcome = function () {
         this.out.println();
@@ -120,11 +121,6 @@ var Game = (function () {
         this.isOn = false;
         this.out.println("Thank you for playing.  Good bye.");
         this.out.println("Hit F5 to restart the game");
-    };
-    Game.prototype.SaveYourSelf = function () {
-        this.isOn = false;
-        this.out.println("doei");
-        this.out.println("Press F5 to restart");
     };
     Game.prototype.goRoom = function (params) {
         if (params.length == 0) {
@@ -288,6 +284,18 @@ var Room = (function () {
     };
     return Room;
 }());
+var Freedom = (function (_super) {
+    __extends(Freedom, _super);
+    function Freedom() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Freedom.prototype.execute = function (params) {
+        this.game.currentRoom = this.game.freedomRoom;
+        this.game.out.println("you are teleported to " + this.game.currentRoom.description);
+        return false;
+    };
+    return Freedom;
+}(Command));
 var Go = (function (_super) {
     __extends(Go, _super);
     function Go() {
@@ -431,6 +439,7 @@ var Look = (function (_super) {
     }
     Look.prototype.execute = function (params) {
         this.game.out.println("You are " + this.game.currentRoom.description);
+        return false;
     };
     return Look;
 }(Command));
