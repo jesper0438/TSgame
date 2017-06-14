@@ -44,7 +44,7 @@ var Game = (function () {
         var smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!");
         var lab = new Room("in a computing lab");
         var valkuil1 = new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
-        var valkuil2 = new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
+        var valkuil2 = new Room("Trapped! You can use the 'teleport' command or restart de game!");
         var frontdesk = new Room("Bij de dames van de receptie");
         var canteen = new Room("At the canteen");
         var sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
@@ -60,7 +60,7 @@ var Game = (function () {
         var pc2 = new Room("Computer2, type in inloggen or login");
         var freedom = new Room("Free, you win!");
         var flag = new Room("At the flag, congratz! Telport now");
-        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null, null);
+        enterance.setExits(smos, frontdesk, null, null, null, null, null, null, null);
         smos.setExits(breskens, null, enterance, null, null, null, null, null, null);
         lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
         valkuil1.setExits(null, null, null, null, null, null, null, null, null);
@@ -70,13 +70,14 @@ var Game = (function () {
         canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null, null);
         elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
         firstfloor.setExits(null, null, null, null, secondfloor, null, null, null, null);
-        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null, null);
+        secondfloor.setExits(null, l202, null, null, roof, firstfloor, null, null, null);
         roof.setExits(null, flag, null, null, null, null, null, null, null);
-        l202.setExits(secondfloor, l203, null, null, null, null, null, null, null);
-        l203.setExits(firstfloor, null, null, null, null, null, null, null, null);
+        l202.setExits(null, l203, null, secondfloor, null, null, null, null, null);
+        l203.setExits(null, null, null, l202, null, null, null, null, null);
         flag.setExits(null, null, null, null, null, null, freedom, null, null);
         pc1.setExits(null, null, null, null, null, null, null, null, null);
         pc2.setExits(null, null, null, null, null, null, null, null, null);
+        basement.setExits(null, null, null, null, elevator, null, null, null, null);
         this.currentRoom = enterance;
         this.respawnRoom = smos;
     };

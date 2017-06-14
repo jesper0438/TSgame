@@ -44,7 +44,7 @@ class Game {
         let smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!")
         let lab = new Room("in a computing lab");
         let valkuil1 = new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
-        let valkuil2 =  new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
+        let valkuil2 =  new Room("Trapped! You can use the 'teleport' command or restart de game!");
         let frontdesk = new Room("Bij de dames van de receptie");
         let canteen = new Room("At the canteen");
         let sandwichsection = new Room("bij de broodjesafdeling, wat een keuze!");
@@ -62,7 +62,7 @@ class Game {
         let flag = new Room("At the flag, congratz! Telport now");
 
         // initialise room exits
-        enterance.setExits(smos, frontdesk, valkuil1, lab, null, null, null, null, null);
+        enterance.setExits(smos, frontdesk, null, null, null, null, null, null, null);
         smos.setExits(breskens, null, enterance, null, null, null, null, null, null);
         lab.setExits(pc2, pc1, canteen, null, null, null, null, null, null);
         valkuil1.setExits(null, null, null, null, null, null, null, null, null);
@@ -72,16 +72,18 @@ class Game {
         canteen.setExits(lab, elevator, null, frontdesk, null, null, null, null, null);
         elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
         firstfloor.setExits(null, null, null, null, secondfloor, null, null, null, null);
-        secondfloor.setExits(null, l202, l203, null, roof, firstfloor, null, null, null);
+        secondfloor.setExits(null, l202, null, null, roof, firstfloor, null, null, null);
         roof.setExits(null, flag, null, null, null, null, null, null, null);
-        l202.setExits(secondfloor, l203, null, null, null, null, null, null, null);
-        l203.setExits(firstfloor, null, null, null, null, null, null, null, null);
+        l202.setExits(null, l203, null, secondfloor, null, null, null, null, null);
+        l203.setExits(null, null, null, l202, null, null, null, null, null);
         flag.setExits(null, null, null, null, null, null, freedom, null, null);
         pc1.setExits(null, null, null, null, null, null, null, null, null);
         pc2.setExits(null, null, null, null, null, null, null, null, null);
+        basement.setExits(null, null, null, null, elevator, null, null, null, null);
 
         // spawn player outside
         this.currentRoom = enterance;
+        // teleports player to Smos after typing "Teleport"
         this.respawnRoom = smos;
     }
        
