@@ -43,7 +43,7 @@ class Game {
         let enterance = new Room("at the interance, welcome to the HZ-dungeon");
         let smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!")
         let lab = new Room("in a computing lab");
-        let valkuil1 = new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
+        let valkuil1 = new Room("Not paying atention. You fell from the roof! Please press F5 to restart the game.");
         let valkuil2 =  new Room("Trapped! You can use the 'teleport' command or restart de game!");
         let frontdesk = new Room("Bij de dames van de receptie");
         let canteen = new Room("At the canteen");
@@ -73,7 +73,7 @@ class Game {
         elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
         firstfloor.setExits(null, null, null, null, secondfloor, null, null, null, null);
         secondfloor.setExits(null, l202, null, null, roof, firstfloor, null, null, null);
-        roof.setExits(null, flag, null, null, null, null, null, null, null);
+        roof.setExits(null, flag, null, valkuil1, null, null, null, null, null);
         l202.setExits(null, l203, null, secondfloor, null, null, null, null, null);
         l203.setExits(null, null, null, l202, null, null, null, null, null);
         flag.setExits(null, null, null, null, null, null, freedom, null, null);

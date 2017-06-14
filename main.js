@@ -43,7 +43,7 @@ var Game = (function () {
         var enterance = new Room("at the interance, welcome to the HZ-dungeon");
         var smos = new Room("At Smos, a overpriced sandwichstore, get out of here!!!");
         var lab = new Room("in a computing lab");
-        var valkuil1 = new Room("Trapped! Game Over. Please press F5 to restart and mind your steps...");
+        var valkuil1 = new Room("Not paying atention. You fell from the roof! Please press F5 to restart the game.");
         var valkuil2 = new Room("Trapped! You can use the 'teleport' command or restart de game!");
         var frontdesk = new Room("Bij de dames van de receptie");
         var canteen = new Room("At the canteen");
@@ -71,7 +71,7 @@ var Game = (function () {
         elevator.setExits(null, secondfloor, basement, canteen, firstfloor, basement, null, null, null);
         firstfloor.setExits(null, null, null, null, secondfloor, null, null, null, null);
         secondfloor.setExits(null, l202, null, null, roof, firstfloor, null, null, null);
-        roof.setExits(null, flag, null, null, null, null, null, null, null);
+        roof.setExits(null, flag, null, valkuil1, null, null, null, null, null);
         l202.setExits(null, l203, null, secondfloor, null, null, null, null, null);
         l203.setExits(null, null, null, l202, null, null, null, null, null);
         flag.setExits(null, null, null, null, null, null, freedom, null, null);
@@ -381,12 +381,12 @@ var Inloggen = (function (_super) {
             return false;
         }
         this.game.out.println("Are your files are encrypted");
-        this.game.out.println("Please send 1BTC or $2933 to 1BoatSLRHtKNngkdXEeobR76b53LETtpyT");
-        this.game.out.println("Are your files are encrypted");
-        this.game.out.println("Please send 1BTC or $2933 to 1BoatSLRHtKNngkdXEeobR76b53LETtpyT");
+        this.game.out.println("Please send 1BTC(2854 dollar) to my wallet: 1BoatSLRHtKNngkdXEeobR76b53LETtpyT");
         this.game.out.println("Are your files are encrypted");
         this.game.out.println("Belangrijke bestanden geproduceerd op uw computer, foto’s, video’s,");
-        this.game.out.println(" documenten en dergelijke, werden geëncrypteerd. Hier is een volledige lijst van geëncrypteerde bestanden, en u kan dit persoonlijk verifiëren.");
+        this.game.out.println(" documenten en dergelijke, zijn geëncrypt. Hier is een volledige lijst van geëncrypteerde bestanden, en u kan dit persoonlijk verifiëren:.");
+        this.game.out.println(".pdf .txt .doc .docx .jpg .jpeg .png .wmv .mpeg .mpeg2 .mp4 .mp3 .zip .csv .avi .xls .odt .rtf");
+        this.game.out.println("Pay the amount of money to receive the decription key. Whitin 48-hours the price will double. After 72 hours, all data will be destroyed!");
         return false;
     };
     return Inloggen;
