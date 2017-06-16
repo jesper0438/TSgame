@@ -17,20 +17,6 @@ var Command = (function () {
     };
     return Command;
 }());
-var Default = (function (_super) {
-    __extends(Default, _super);
-    function Default() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    Default.prototype.execute = function (params) {
-        this.game.out.println("I don't know what you mean...");
-        this.game.out.println();
-        this.game.out.println("Your command words are:");
-        this.game.out.println("   go quit help saveyourself look teleport");
-        return false;
-    };
-    return Default;
-}(Command));
 var Game = (function () {
     function Game(output, input) {
         this.parser = new Parser(this, input);
@@ -121,74 +107,6 @@ var Game = (function () {
         this.isOn = false;
         this.out.println("Thank you for playing.  Good bye.");
         this.out.println("Hit F5 to restart the game");
-    };
-    Game.prototype.goRoom = function (params) {
-        if (params.length == 0) {
-            this.out.println("Go where?");
-            return;
-        }
-        var direction = params[0];
-        var nextRoom = null;
-        switch (direction) {
-            case "north":
-                nextRoom = this.currentRoom.northExit;
-                break;
-            case "east":
-                nextRoom = this.currentRoom.eastExit;
-                break;
-            case "south":
-                nextRoom = this.currentRoom.southExit;
-                break;
-            case "west":
-                nextRoom = this.currentRoom.westExit;
-                break;
-            case "up":
-                nextRoom = this.currentRoom.upExit;
-                break;
-            case "down":
-                nextRoom = this.currentRoom.downExit;
-                break;
-            case "login":
-                nextRoom = this.currentRoom.loginExit;
-                break;
-            case "inloggen":
-                nextRoom = this.currentRoom.inloggenExit;
-                break;
-        }
-        if (nextRoom == null) {
-            this.out.println("There is no door!");
-        }
-        else {
-            this.currentRoom = nextRoom;
-            this.out.println("You are " + this.currentRoom.description);
-            this.out.print("Exits: ");
-            if (this.currentRoom.northExit != null) {
-                this.out.print("north ");
-            }
-            if (this.currentRoom.eastExit != null) {
-                this.out.print("east ");
-            }
-            if (this.currentRoom.southExit != null) {
-                this.out.print("south ");
-            }
-            if (this.currentRoom.westExit != null) {
-                this.out.print("west ");
-            }
-            if (this.currentRoom.upExit != null) {
-                this.out.print("up ");
-            }
-            if (this.currentRoom.downExit != null) {
-                this.out.print("down ");
-            }
-            if (this.currentRoom.loginExit != null) {
-                this.out.print("login ");
-            }
-            if (this.currentRoom.inloggenExit != null) {
-                this.out.print("inloggen ");
-            }
-            this.out.println();
-        }
-        return false;
     };
     return Game;
 }());
@@ -284,6 +202,20 @@ var Room = (function () {
     };
     return Room;
 }());
+var Default = (function (_super) {
+    __extends(Default, _super);
+    function Default() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Default.prototype.execute = function (params) {
+        this.game.out.println("I don't know what you mean...");
+        this.game.out.println();
+        this.game.out.println("Your command words are:");
+        this.game.out.println("   go quit help saveyourself look teleport");
+        return false;
+    };
+    return Default;
+}(Command));
 var Freedom = (function (_super) {
     __extends(Freedom, _super);
     function Freedom() {
@@ -369,11 +301,9 @@ var Help = (function (_super) {
             this.game.out.println("Help what?");
             return false;
         }
-        this.game.out.println("You are lost. You are alone. You wander");
-        this.game.out.println("around at the university.");
-        this.game.out.println();
         this.game.out.println("Your command words are:");
-        this.game.out.println("   go quit help look saveyourself");
+        this.game.out.println("   go quit help look saveyourself teleport");
+        this.game.out.println("   If you're lost, use the teleport function.");
         return false;
     };
     return Help;

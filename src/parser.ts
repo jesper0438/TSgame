@@ -65,7 +65,7 @@ class Parser {
             return;
         }
         
-        //find the command to execute
+        //Finding the command. If no command found, return Default.
         let command : Command;
         command = this.commands[words[0]];
         if ( command == null )

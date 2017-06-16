@@ -5,11 +5,11 @@ class Help extends Command {
             this.game.out.println("Help what?");
             return false;
         }
-        this.game.out.println("You are lost. You are alone. You wander");
-        this.game.out.println("around at the university.");
-        this.game.out.println();
+
         this.game.out.println("Your command words are:");
-        this.game.out.println("   go quit help look saveyourself");
+        this.game.out.println("   go quit help look saveyourself teleport");
+        this.game.out.println("   If you're lost, use the teleport function.");
+        
         return false;
 }
 }
