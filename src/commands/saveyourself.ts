@@ -1,4 +1,9 @@
 class Saveyourself extends Command {
+    /**
+     * Print out error message when user enters unknown command.
+     * Another option for quiting the game. Game will restart after filling in.
+     * 
+     */
 
    execute(params : string[]) : boolean {
         if(params.length > 0) {

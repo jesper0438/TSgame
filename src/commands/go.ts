@@ -1,5 +1,8 @@
 class Go extends Command {
-    
+/**
+     * Print out error message when user enters unknown command.
+     * 
+     */
 execute(params : string[]) : boolean {
         if(params.length == 0) {
             // if there is no second word, we don't know where to go...

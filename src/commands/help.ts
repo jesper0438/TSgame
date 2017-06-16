@@ -1,5 +1,9 @@
 class Help extends Command {
-    
+  /**
+     * Print out error message when user enters unknown command.
+     * Here we send a message with options to go further.
+     * 
+     */
      execute(params : string[]) : boolean {
         if(params.length > 0) {
             this.game.out.println("Help what?");

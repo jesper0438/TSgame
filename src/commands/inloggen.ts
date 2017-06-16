@@ -1,5 +1,9 @@
 class Inloggen extends Command {
-
+/**
+     * Print out error message when user enters unknown command.
+     * Here we send a message that the computer is infected with ransomeware.
+     * 
+     */
 execute(params : string[]) : boolean {
         if(params.length > 0) {
             this.game.out.println("Login what?");
@@ -12,6 +16,7 @@ execute(params : string[]) : boolean {
         this.game.out.println(" documenten en dergelijke, zijn geëncrypt. Hier is een volledige lijst van geëncrypteerde bestanden, en u kan dit persoonlijk verifiëren:.")
         this.game.out.println(".pdf .txt .doc .docx .jpg .jpeg .png .wmv .mpeg .mpeg2 .mp4 .mp3 .zip .csv .avi .xls .odt .rtf");
         this.game.out.println("Pay the amount of money to receive the decription key. Whitin 48-hours the price will double. After 72 hours, all data will be destroyed!");
+        this.game.out.println("Or just use the F5 button, this solves most problems!");
         return false;
 }
 }

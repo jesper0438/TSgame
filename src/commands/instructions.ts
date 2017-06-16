@@ -1,4 +1,9 @@
 class Instructions extends Command {
+     /**
+     * Print out error message when user enters unknown command.
+     * Here we send a message with instructions to play the game.
+     * 
+     */
 
 execute(params : string[]) : boolean {
         if(params.length > 0) {
